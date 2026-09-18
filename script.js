@@ -1,12 +1,16 @@
 const dino = document.getElementById("icon");
 const container = document.querySelector(".container");
 let jumpingTime = 600;
+// Nothing moves until the first jump, and everything freezes again on game over.
+let gameStarted = false;
+let gameOver = false;
 
 setInterval(() => {
-  dino.classList.toggle("run-2");
+  if (gameStarted && !gameOver) dino.classList.toggle("run-2");
 }, 120);
 
 function cloud() {
+  if (gameOver) return;
   // Creates a new empty HTML element, assigns it the class .cloud,
   // and inserts it into the game.
   const cloudEl = document.createElement("div");
@@ -26,6 +30,7 @@ function cloud() {
   // otherwise it would run indefinitely for no reason) and the element is removed from
   // the DOM (using `removeChild`, to avoid accumulating hundreds of invisible 'div's).
   const moveCloud = setInterval(() => {
+    if (gameOver) return;
     if (cloudPosition < -85) {
       // 85 = width of the cloud
       clearInterval(moveCloud);
@@ -39,15 +44,16 @@ function cloud() {
   setTimeout(cloud, Math.random() * 10000);
 }
 
-cloud();
-
 const jump = (duration = 600) => {
+  // Like the Chrome dino game, the first jump starts the run.
+  if (!gameStarted) startGame();
   if (!dino.classList.contains("isJumping")) {
     dino.style.animationDuration = `${duration}ms`;
     dino.classList.add("isJumping");
 
     setTimeout(() => {
-      dino.classList.remove("isJumping");
+      // After a game over the dino stays frozen mid-air.
+      if (!gameOver) dino.classList.remove("isJumping");
     }, duration);
   }
 };
@@ -112,9 +118,10 @@ let unlockedTypeCount = 1;
 let obstacles = [];
 let score = 0;
 let bestScore = loadBestScore();
-let gameOver = false;
 let previousFrameTime = null;
 let animationFrame;
+let obstacleTimer;
+let scoreTimer;
 
 function createObstacle() {
   if (gameOver) return;
@@ -261,7 +268,14 @@ window.addEventListener(
 restartButton.addEventListener("click", () => window.location.reload());
 scoreDisplay.textContent = "00000";
 bestScoreDisplay.textContent = String(bestScore).padStart(5, "0");
-createObstacle();
-const obstacleTimer = setInterval(createObstacle, spawnInterval);
-const scoreTimer = setInterval(updateScore, 1000);
-animationFrame = requestAnimationFrame(updateGame);
+
+// Called by the first jump: releases every paused animation and starts the round.
+function startGame() {
+  gameStarted = true;
+  container.classList.remove("is-idle");
+  cloud();
+  createObstacle();
+  obstacleTimer = setInterval(createObstacle, spawnInterval);
+  scoreTimer = setInterval(updateScore, 1000);
+  animationFrame = requestAnimationFrame(updateGame);
+}

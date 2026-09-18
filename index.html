@@ -7,14 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container is-idle">
         <div class="score">
             Score: <span id="score-value">00000</span>
             <div class="best-score">Best: <span id="best-score-value">00000</span></div>
         </div>
         <div id="icon"></div>
         <div class="horizon"></div>
-        
+
         <div class="obstacles-container">
             <!-- <div class="cactus"></div> -->
         </div>
@@ -22,6 +22,20 @@
             <h1>Game Over</h1>
             <button id="restart-button">Restart</button>
         </div>
+    </div>
+
+    <div class="instructions">
+        <div class="rule"></div>
+        <p>HOW TO PLAY</p>
+        <div class="rule"></div>
+
+        <p>[ SPACE ]&nbsp;&nbsp;/&nbsp;&nbsp;[ ↑ ]<br>JUMP</p>
+        <p>☠ AVOID ☠<br>CACTUS • PTERODACTYL</p>
+        <p>★ SCORE ★<br>+1 EVERY SECOND</p>
+        <p>10&nbsp;&nbsp;&nbsp;20&nbsp;&nbsp;&nbsp;30<br>NEW OBSTACLES</p>
+        <p>&gt;&gt;&gt; GOOD LUCK &lt;&lt;&lt;</p>
+
+        <div class="rule"></div>
     </div>
 
     <script src="script.js"></script>
