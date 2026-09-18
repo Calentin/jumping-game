@@ -23,6 +23,7 @@ body {
     position: absolute;
     bottom: 15px;
     left: 80px;
+    z-index: 1; 
 }
 
 #icon.run-2 {
