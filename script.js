@@ -1,5 +1,6 @@
 const dino = document.getElementById('icon-offline');
 const container = document.querySelector('.container');
+let jumpingTime = 600
 
 setInterval(() => {
     dino.classList.toggle('run-2');
@@ -39,9 +40,20 @@ function cloud() {
 
 cloud();
 
+const jump = (duration = 600) => {
+    if (!dino.classList.contains('isJumping')) {
+        dino.style.animationDuration = `${duration}ms`;
+        dino.classList.add('isJumping');
+
+        setTimeout(() => {
+            dino.classList.remove('isJumping');
+        }, duration);
+    }
+}
+
 addEventListener('keydown', (event) => {
-    if (event.code === 'Space' || event.code === 'ArrowUp' || event.code === 'KeyW' || event.code === 'MouseLeft') {
-       console.log('jump');
+    if (event.code === 'Space' || event.code === 'ArrowUp' || event.code === 'KeyW') {
+      jump(jumpingTime);
        
     }
-});
+});І
