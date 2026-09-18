@@ -1,4 +1,4 @@
-const dino = document.getElementById('icon-offline');
+const dino = document.getElementById('icon');
 const container = document.querySelector('.container');
 let jumpingTime = 600
 
@@ -56,4 +56,4 @@ addEventListener('keydown', (event) => {
       jump(jumpingTime);
        
     }
-});І
+});
