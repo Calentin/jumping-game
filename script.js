@@ -38,3 +38,10 @@ function cloud() {
 }
 
 cloud();
+
+addEventListener('keydown', (event) => {
+    if (event.code === 'Space' || event.code === 'ArrowUp' || event.code === 'KeyW' || event.code === 'MouseLeft') {
+       console.log('jump');
+       
+    }
+});
