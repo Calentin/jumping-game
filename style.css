@@ -1,103 +1,104 @@
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
 }
 .container {
-    position: absolute;
-    width: 100%;
-    height: 300px;
-    background-color: #f0f0f0;
-    overflow: hidden;
-    color: #535353;
-    font-size: xx-large;
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  background-color: #f0f0f0;
+  overflow: hidden;
+  color: #535353;
+  font-size: xx-large;
 }
 
 #icon {
-    width: 88px;
-    height: 94px;
-    background-image: url(images/spritesheet.png);
-    background-repeat: no-repeat;
-    background-position: -1854px -2px;
-    position: absolute;
-    bottom: 15px;
-    left: 80px;
-    z-index: 1; 
+  width: 88px;
+  height: 94px;
+  background-image: url(images/spritesheet.png);
+  background-repeat: no-repeat;
+  background-position: -1854px -2px;
+  position: absolute;
+  bottom: 15px;
+  left: 80px;
+  z-index: 1;
 }
 
 #icon.run-2 {
-    background-position: -1942px -2px;
+  background-position: -1942px -2px;
 }
 
 .horizon {
-    width: 100%;
-    height: 24px;
-    background-image: url(images/spritesheet.png);
-    background-repeat: repeat-x;
-    background-position: -2px -104px;
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    will-change: transform;
-    animation: horizonMove 3s linear infinite;
+  width: 100%;
+  height: 24px;
+  background-image: url(images/spritesheet.png);
+  background-repeat: repeat-x;
+  background-position: -2px -104px;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  will-change: transform;
+  animation: horizonMove 3s linear infinite;
 }
 
 @keyframes horizonMove {
-    from {
-        background-position-x: -2px;
-    }
-    to {
-        background-position-x: -2402px;   /* -2px - 2400px (width of the texture) */
-    }
+  from {
+    background-position-x: -2px;
+  }
+  to {
+    background-position-x: -2402px; /* -2px - 2400px (width of the texture) */
+  }
 }
 
 .score {
-    position: absolute;
-    top: 10px;
-    right: 30px;
-    font: 20px Arial, sans-serif;
-    border-radius: 4%;
-    border: #535353 2px dotted;
-    padding: 20px;
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  font:
+    20px Arial,
+    sans-serif;
+  border-radius: 4%;
+  border: #535353 2px dotted;
+  padding: 20px;
 }
 
 .game-over {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 40px;
-    color: #535353;
-    display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: #535353;
+  display: none;
 }
 
 #restart-button {
-    position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 20px;
-    padding: 10px 20px;
-    background-color: #535353;
-    color: #f0f0f0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  padding: 10px 20px;
+  background-color: #535353;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .cloud {
-    width: 85px;
-    height: 27px;
-    background-image: url(images/spritesheet.png);
-    background-position: -174px -2px;
-    position: absolute;
-    will-change: transform;
+  width: 85px;
+  height: 27px;
+  background-image: url(images/spritesheet.png);
+  background-position: -174px -2px;
+  position: absolute;
+  will-change: transform;
 }
 
-
 .isJumping {
-    animation: jumpingAnimation 0.1s linear;
+  animation: jumpingAnimation 0.1s linear;
 }
 
 @keyframes jumpingAnimation {
@@ -120,13 +121,64 @@ body {
   }
 }
 
-/*.cactus {
-    width: 45px;
-    height: 98px;
-    background-image: url(images/spritesheet.png);
-    background-repeat: no-repeat;
-    background-position: -655px -2px;
-    position: absolute;
-    bottom: 29px;
-    right: 20px;
-}*/
+/* Obstacle appearance and revealing the existing game-over message.
+   All teammate styles above this section are preserved unchanged. */
+.obstacle {
+  background-image: url(images/spritesheet.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 29px;
+  left: 0;
+  will-change: transform;
+}
+
+.cactus {
+  width: 45px;
+  height: 98px;
+  background-position: -655px -2px;
+}
+
+.small-cactus {
+  width: 34px;
+  height: 70px;
+  background-position: -446px -2px;
+}
+
+.paired-cacti {
+  width: 68px;
+  height: 70px;
+  background-position: -480px -2px;
+}
+
+.bird {
+  width: 92px;
+  height: 80px;
+  bottom: 40px;
+  background-position: -260px -2px;
+  animation: flap 300ms steps(1) infinite;
+}
+
+@keyframes flap {
+  0%,
+  100% {
+    background-position: -260px -2px;
+  }
+  50% {
+    background-position: -352px -2px;
+  }
+}
+
+.is-game-over .bird {
+  animation-play-state: paused;
+}
+
+.is-game-over .game-over {
+  display: block;
+  z-index: 2;
+}
+
+.best-score {
+  margin-top: 8px;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
