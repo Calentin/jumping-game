@@ -1,6 +1,6 @@
 # Jumping Game
 
-Open `index.html` in a browser. The existing controls are Space and Up Arrow.
+Open the link in the browser : https://calentin.github.io/jumping-game/. The existing controls are Space and Up Arrow.
 
 ## Scope
 
